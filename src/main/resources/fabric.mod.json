@@ -1,11 +1,11 @@
 {
 	"schemaVersion": 1,
-	"id": "examplemod",
+	"id": "helver",
 	"version": "${version}",
-	"name": "Example Mod",
-	"description": "This mod aims to help new BTA modders.",
+	"name": "Helver",
+	"description": "Redart15 BTA-library",
 	"authors": [
-		"Turnip Labs"
+		"Redart15"
 	],
 	"contact": {
 		"homepage": "",
@@ -16,20 +16,20 @@
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-			"turniplabs.examplemod.ExampleMod"
+			"redart15.helver.HelverMod"
 		],
 		"beforeGameStart": [
-			"turniplabs.examplemod.ExampleMod"
+			"redart15.helver.HelverMod"
 		],
 		"afterGameStart": [
-			"turniplabs.examplemod.ExampleMod"
+			"redart15.helver.HelverMod"
 		],
 		"recipesReady": [
-			"turniplabs.examplemod.ExampleMod"
+			"redart15.helver.HelverMod"
 		]
 	},
 	"mixins": [
-		"examplemod.mixins.json"
+		"helver.mixins.json"
 	],
 	"depends": {
 		"fabricloader": ">=${fabricloader}",
