@@ -4,7 +4,7 @@
 [![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/Redart15/helver/total?color=%233fa33f&cacheSeconds=1)](https://tooomm.github.io/github-release-stats/?username=Redart15&repository=helver)
 # Helver Mod
 
-Helper libabry containing function for common use cases in Redart15 mods.
+Helper libabry containing function for common use cases in mods(BTA) written by myself, Redart15.
 
 ## Prerequites
 - JDK for Java 17 ([Eclipse Temurin](https://adoptium.net/temurin/releases/) recommended)
