@@ -17,10 +17,11 @@ import static net.minecraft.core.util.helper.Direction.*;
  * without needing to know much aside the location of the block.
  * <br><br>
  * static methods exists for those:
- *<ul>
+ * <ul>
  *  <li>BlockLogicFullyRotatable</li>
  *  <li>BlockLogicRotatable</li>
- *</ul>
+ * </ul>
+ *
  * @implNote If you think this class is unnecessary, then you have not worked with metadata
  * long enough.
  */
@@ -29,79 +30,81 @@ import static net.minecraft.core.util.helper.Direction.*;
 public class MetadataBlockHelper {
 	private MetadataBlockHelper() {/* no need to initiate*/}
 
-	private static DyeColor getDyeColor(int metadata){
-		return DyeColor.values()[BlockMetadata.rawGetBitBlock(metadata, 4, 7)];
+	private static DyeColor getDyeColor(int metadata) {
+		return DyeColor.values()[Metadata.rawGetBitBlock(BlockMetadata.BLOCK_LENGTH, metadata, 4, 7)];
 	}
 
-	public static class Slab{
-		private Slab(){/* no need to initiate*/}
-		public enum SlabState{
+	public static class Slab {
+		private Slab() {/* no need to initiate*/}
+
+		public enum SlabState {
 			LOWER, FULLBLOCK, UPPER;
 		}
 
 		/**
-		 * @param metadata  sets the color of slab
-		 * @param state 	determines whether the slab state, lower half, upper half or fullblock
-		 * @return 			returns the metadata for the slab
+		 * @param metadata sets the color of slab
+		 * @param state    determines whether the slab state, lower half, upper half or fullblock
+		 * @return returns the metadata for the slab
 		 */
-		public static int setMetadata(int metadata, SlabState state){
+		public static int setMetadata(int metadata, SlabState state) {
 			return Metadata.rawSetBitBlock(metadata, 0, 1, state.ordinal());
 		}
 
 		/**
-		 * @param state 	determines whether the slab state, lower half, upper half or fullblock
-		 * @return			returns the metadata for the slab
+		 * @param state determines whether the slab state, lower half, upper half or fullblock
+		 * @return returns the metadata for the slab
 		 */
-		public static int setMetadata(SlabState state){
+		public static int setMetadata(SlabState state) {
 			return Metadata.rawSetBitBlock(0, 0, 1, state.ordinal());
 		}
 
 		/**
-		 * @param metadata  sets the color of slab
-		 * @param state 	determines whether the slab state, lower half, upper half or fullblock
-		 * @param color		set the color of the slab
+		 * @param metadata sets the color of slab
+		 * @param state    determines whether the slab state, lower half, upper half or fullblock
+		 * @param color    set the color of the slab
 		 * @return returns the metadata for the slab
 		 */
-		public static int setMetadata(int metadata, SlabState state, DyeColor color){
-			metadata =  Metadata.rawSetBitBlock(metadata, 0, 1, state.ordinal());
+		public static int setMetadata(int metadata, SlabState state, DyeColor color) {
+			metadata = Metadata.rawSetBitBlock(metadata, 0, 1, state.ordinal());
 			return Metadata.rawSetBitBlock(metadata, 4, 7, color.blockMeta);
 		}
 
 		/**
-		 * @param state 	determines whether the slab state, lower half, upper half or fullblock
-		 * @param color		set the color of the slab
-		 * @return 			returns the metadata for the slab
+		 * @param state determines whether the slab state, lower half, upper half or fullblock
+		 * @param color set the color of the slab
+		 * @return returns the metadata for the slab
 		 */
-		public static int setMetadata(SlabState state, DyeColor color){
+		public static int setMetadata(SlabState state, DyeColor color) {
 			return Slab.setMetadata(0, state, color);
 		}
 
 
 		/**
-		 * @param metadata	the slab's metadata
-		 * @return 			returns the slab state
+		 * @param metadata the slab's metadata
+		 * @return returns the slab state
 		 */
-		public static SlabState getState(int metadata){
-			int state = BlockMetadata.rawGetBitBlock(metadata, 0, 1);
+		public static SlabState getState(int metadata) {
+			int state = Metadata.rawGetBitBlock(BlockMetadata.BLOCK_LENGTH, metadata, 0, 1);
 			return SlabState.values()[state];
 		}
 
 		/**
-		 * @param metadata	the slab's metadata
-		 * @return 			returns the DyeColor of the slab
+		 * @param metadata the slab's metadata
+		 * @return returns the DyeColor of the slab
 		 */
-		public static DyeColor getColor(int metadata){
+		public static DyeColor getColor(int metadata) {
 			return MetadataBlockHelper.getDyeColor(metadata);
 		}
 	}
+
 	public static class Stairs {
-		private Stairs(){/* no need to initiate*/}
+		private Stairs() {/* no need to initiate*/}
 
 		/**
 		 * @param metadata  current metadata
-		 * @param direction	determines the direction the stair are ascending
-		 * @param isUpper 	determines whether the stair is placed facing upwards or downwards
-		 * @return 			the metadata for the stairs in the direction ascending
+		 * @param direction determines the direction the stair are ascending
+		 * @param isUpper   determines whether the stair is placed facing upwards or downwards
+		 * @return the metadata for the stairs in the direction ascending
 		 */
 		public static int setMetadata(int metadata, boolean isUpper, Direction direction) {
 			metadata = Metadata.rawSetBitBlock(metadata, 0, 1, getMetadataFromDirection(direction));
@@ -111,7 +114,7 @@ public class MetadataBlockHelper {
 		/**
 		 * @param isUpper   determines whether the stair is placed facing upwards or downwards
 		 * @param direction determines the direction the stair are ascending
-		 * @return			the metadata for the stairs in the direction ascending
+		 * @return the metadata for the stairs in the direction ascending
 		 */
 		public static int setMetadata(boolean isUpper, Direction direction) {
 			int metadata = Metadata.rawSetBitBlock(0, 0, 1, getMetadataFromDirection(direction));
@@ -122,7 +125,7 @@ public class MetadataBlockHelper {
 		 * @param dyeColor  sets the color of stairs
 		 * @param isUpper   determines whether the stair is placed facing upwards or downwards
 		 * @param direction determines the direction the stair are ascending
-		 * @return 			the metadata for the stairs in the direction ascending
+		 * @return the metadata for the stairs in the direction ascending
 		 */
 		public static int setMetadata(boolean isUpper, Direction direction, DyeColor dyeColor) {
 			int metadata = Metadata.rawSetBitBlock(0, 0, 1, getMetadataFromDirection(direction));
@@ -153,7 +156,7 @@ public class MetadataBlockHelper {
 		 * Importantly this differs from how BlockLogicStairs implements direction, this due to BTA placement setting and many layers of abstraction.
 		 */
 		public static Direction getDirectionFromMetadata(int metadata) {
-			int direction = BlockMetadata.rawGetBitBlock(metadata, 0, 1);
+			int direction = Metadata.rawGetBitBlock(BlockMetadata.BLOCK_LENGTH, metadata, 0, 1);
 			switch (direction) {
 				case 3:
 					return Direction.NORTH;
@@ -168,29 +171,31 @@ public class MetadataBlockHelper {
 		}
 
 		/**
-		 * @param metadata  current metadatas
-		 * @return 			if the stair is facing upward or downwards
+		 * @param metadata current metadatas
+		 * @return if the stair is facing upward or downwards
 		 */
 		public static boolean isUpper(int metadata) {
 			return BlockMetadata.isSet(metadata, 3);
 		}
 
 		/**
-		 * @param metadata	the stair's metadata
-		 * @return 			the DyeColor of the slab
+		 * @param metadata the stair's metadata
+		 * @return the DyeColor of the slab
 		 */
-		public static DyeColor getColor(int metadata){
+		public static DyeColor getColor(int metadata) {
 			return MetadataBlockHelper.getDyeColor(metadata);
 		}
 	}
+
 	public static class Trapdoor {
-		private Trapdoor(){/* no need to initiate*/}
+		private Trapdoor() {/* no need to initiate*/}
+
 		/**
-		 * @param metadata	metadata of the block
+		 * @param metadata  metadata of the block
 		 * @param isUpper   determines whether the trapdoor is placed on the upper or lower part of the block
 		 * @param isOpen    sets the trapdoor as open or not
 		 * @param direction determines the direction the stair are ascending
-		 * @return 			the metadata for the stairs in the direction ascending
+		 * @return the metadata for the stairs in the direction ascending
 		 */
 		public static int setMetadata(int metadata, boolean isUpper, boolean isOpen, Direction direction) {
 			metadata = Metadata.rawSetBitBlock(metadata, 0, 1, getTrapDoorMetaForDirection(direction));
@@ -203,7 +208,7 @@ public class MetadataBlockHelper {
 		 * @param isUpper   determines whether the trapdoor is placed on the upper or lower part of the block
 		 * @param isOpen    sets the trapdoor as open or not
 		 * @param direction determines the direction the stair are ascending
-		 * @return 			the metadata for the stairs in the direction ascending
+		 * @return the metadata for the stairs in the direction ascending
 		 */
 		public static int setMetadata(boolean isUpper, boolean isOpen, Direction direction) {
 			return setMetadata(0, isUpper, isOpen, direction.getOpposite());
@@ -214,7 +219,7 @@ public class MetadataBlockHelper {
 		 * @param isUpper   determines whether the trapdoor is placed on the upper or lower part of the block
 		 * @param isOpen    sets the trapdoor as open or not
 		 * @param direction determines the direction the stair are ascending
-		 * @return 			the metadata for the stairs in the direction ascending
+		 * @return the metadata for the stairs in the direction ascending
 		 */
 		public static int setMetadata(boolean isUpper, boolean isOpen, Direction direction, DyeColor dyeColor) {
 			int metadata = setMetadata(0, isUpper, isOpen, direction.getOpposite());
@@ -257,24 +262,24 @@ public class MetadataBlockHelper {
 		}
 
 		/**
-		 * @param metadata	the trapdoor's metadata
-		 * @return 			returns the metadata for the stairs in the direction ascending
+		 * @param metadata the trapdoor's metadata
+		 * @return returns the metadata for the stairs in the direction ascending
 		 */
 		public static DyeColor getDyeColor(int metadata) {
 			return MetadataBlockHelper.getDyeColor(metadata);
 		}
 
 		/**
-		 * @param metadata	the trapdoor's metadata
-		 * @return 			returns the metadata for the stairs in the direction ascending
+		 * @param metadata the trapdoor's metadata
+		 * @return returns the metadata for the stairs in the direction ascending
 		 */
 		public static boolean isUpper(int metadata) {
 			return BlockMetadata.isSet(metadata, 2);
 		}
 
 		/**
-		 * @param metadata	the trapdoor's metadata
-		 * @return 			returns the metadata for the stairs in the direction ascending
+		 * @param metadata the trapdoor's metadata
+		 * @return returns the metadata for the stairs in the direction ascending
 		 */
 		public static boolean isOpen(int metadata) {
 			return BlockMetadata.isSet(metadata, 3);
@@ -282,74 +287,76 @@ public class MetadataBlockHelper {
 
 
 	}
-	public static class FenceGate{
-		private FenceGate(){/* no need to initiate*/}
+
+	public static class FenceGate {
+		private FenceGate() {/* no need to initiate*/}
 
 		/**
-		 * @param isOpen	whether the gate is open or not
-		 * @param direction	determines the direction the gate is facing
-		 * @param dyeColor	set the color of the gate
-		 * @return 			the metadata for the fencegate
+		 * @param isOpen    whether the gate is open or not
+		 * @param direction determines the direction the gate is facing
+		 * @param dyeColor  set the color of the gate
+		 * @return the metadata for the fencegate
 		 */
-		public static int setMetadata(boolean isOpen, Direction direction, DyeColor dyeColor){
+		public static int setMetadata(boolean isOpen, Direction direction, DyeColor dyeColor) {
 			return FenceGate.setMetadata(0, isOpen, direction, dyeColor);
 		}
 
 		/**
 		 * @param metadata  metadata of the fencegate
-		 * @param isOpen	whether the gate is open or not
-		 * @param direction	determines the direction the gate is facing
-		 * @param dyeColor	set the color of the gate
-		 * @return 			the metadata for the fencegate
+		 * @param isOpen    whether the gate is open or not
+		 * @param direction determines the direction the gate is facing
+		 * @param dyeColor  set the color of the gate
+		 * @return the metadata for the fencegate
 		 */
-		public static int setMetadata(int metadata, boolean isOpen, Direction direction, DyeColor dyeColor){
+		public static int setMetadata(int metadata, boolean isOpen, Direction direction, DyeColor dyeColor) {
 			metadata = Metadata.rawSetBitBlock(metadata, 0, 1, direction.getHorizontalIndex());
 			metadata = Metadata.rawSetBit(metadata, 3, isOpen ? 1 : 0);
 			return Metadata.rawSetBitBlock(metadata, 4, 7, dyeColor.blockMeta);
 		}
 
 		/**
-		 * @param metadata	the fencegate's metadata
-		 * @return 			if the gate is open or not
+		 * @param metadata the fencegate's metadata
+		 * @return if the gate is open or not
 		 */
-		public static boolean isOpen(int metadata){
+		public static boolean isOpen(int metadata) {
 			return BlockMetadata.isSet(metadata, 3);
 		}
 
 		/**
-		 * @param metadata	the fencegate's metadata
-		 * @return 			DyeColor of the fencegate
+		 * @param metadata the fencegate's metadata
+		 * @return DyeColor of the fencegate
 		 */
-		public static DyeColor getColor(int metadata){
+		public static DyeColor getColor(int metadata) {
 			return MetadataBlockHelper.getDyeColor(metadata);
 		}
 
 		/**
-		 * @param metadata	the fencegate's metadata
-		 * @return 			DyeColor of the fencegate
+		 * @param metadata the fencegate's metadata
+		 * @return DyeColor of the fencegate
 		 */
-		public static Direction getDirection(int metadata){
-			return horizontalDirections[BlockMetadata.rawGetBitBlock(metadata, 0, 1)];
+		public static Direction getDirection(int metadata) {
+			return horizontalDirections[Metadata.rawGetBitBlock(BlockMetadata.BLOCK_LENGTH, metadata, 0, 1)];
 		}
 
 	}
-	public static class Ladder{
-		private Ladder(){/* no need to initiate*/}
+
+	public static class Ladder {
+		private Ladder() {/* no need to initiate*/}
 
 		/**
-		 * @param side		set the color of the gate
-		 * @return 			the metadata for the fencegate
+		 * @param side set the color of the gate
+		 * @return the metadata for the fencegate
 		 */
-		public static int setMetadata(Side side){
+		public static int setMetadata(Side side) {
 			return Ladder.setMetadata(0, side);
 		}
 
 		/**
-		 * @param metadata  metadata of the fencegate
-		 * @param side		set the color of the gate
-		 * @return 			the metadata for the fencegate
+		 * @param metadata metadata of the fencegate
+		 * @param side     set the color of the gate
+		 * @return the metadata for the fencegate
 		 */
-		public static int setMetadata(int metadata, Side side){
+		public static int setMetadata(int metadata, Side side) {
 			return Metadata.rawSetBitBlock(metadata, 0, 2, Ladder.getMetaForSide(side));
 		}
 
