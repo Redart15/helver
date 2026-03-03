@@ -1,6 +1,8 @@
 package redart15.helver.metadata;
 
-class Metadata {
+public class Metadata {
+	public static final int NOT_METADATA = -1;
+
 	private Metadata() {/* no need to initiate*/}
 
 	protected static int rawFlipBit(int metadata, int index) {

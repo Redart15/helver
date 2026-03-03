@@ -2,9 +2,8 @@ package redart15.helver.metadata;
 
 public class BlockMetadata {
 	public static final int BLOCK_LENGTH = 8;
+	public static final int NIBBLE_LENGTH = 4;
 	private static final int MAX_METAVALUE = 0b1111_1111;
-	private static final int NIBBLE_LENGTH = 4;
-	private static final int NOT_METADATA = -1;
 
 	private BlockMetadata() {/* no need to initiate*/}
 
@@ -14,18 +13,18 @@ public class BlockMetadata {
 
 	public static int getBit(int metadata, int index) {
 		if (index >= BLOCK_LENGTH || index < 0) {
-			return NOT_METADATA;
+			return Metadata.NOT_METADATA;
 		}
 		return ((metadata & MAX_METAVALUE) >>> index) & 1;
 	}
 
 	public static int getBitBlock(int metadata, int startIndex, int endIndex) {
 		if (startIndex >= BLOCK_LENGTH || startIndex < 0 || endIndex >= BLOCK_LENGTH || endIndex < 0) {
-			return NOT_METADATA;
+			return Metadata.NOT_METADATA;
 		}
 		int len = endIndex - startIndex;
 		if (len < 0) {
-			return NOT_METADATA;
+			return Metadata.NOT_METADATA;
 		}
 		if (len == 0) {
 			return Metadata.rawGetBit(metadata & MAX_METAVALUE, startIndex);
@@ -47,21 +46,21 @@ public class BlockMetadata {
 
 	public static int setBit(int metadata, int index, int value) {
 		if (index >= BLOCK_LENGTH || index < 0) {
-			return NOT_METADATA;
+			return Metadata.NOT_METADATA;
 		}
 		return Metadata.rawSetBit(metadata & MAX_METAVALUE, index, value & 1);
 	}
 
 	public static int setBitBlock(int metadata, int startIndex, int endIndex, int value) {
 		if (value > (MAX_METAVALUE >>> startIndex) || startIndex >= BLOCK_LENGTH || startIndex < 0 || startIndex > endIndex || endIndex > BLOCK_LENGTH) {
-			return NOT_METADATA;
+			return Metadata.NOT_METADATA;
 		}
 		return Metadata.rawSetBitBlock(metadata & MAX_METAVALUE, startIndex, endIndex - startIndex + 1, value);
 	}
 
 	public static int flipBit(int metadata, int index) {
 		if (index >= BLOCK_LENGTH || index < 0) {
-			return NOT_METADATA;
+			return Metadata.NOT_METADATA;
 		}
 		return Metadata.rawFlipBit(metadata & MAX_METAVALUE, index);
 	}
