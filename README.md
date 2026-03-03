@@ -17,6 +17,6 @@ repositories {
 }
 
 dependencies {
-    modImplementation "com.github.Redart15:helver:1.0.0"
+    modImplementation "com.github.Redart15:helver:1.1.0"
 }
 ```
