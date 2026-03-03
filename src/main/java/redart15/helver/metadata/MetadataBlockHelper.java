@@ -30,7 +30,7 @@ public class MetadataBlockHelper {
 	private MetadataBlockHelper() {/* no need to initiate*/}
 
 	private static DyeColor getDyeColor(int metadata){
-		return DyeColor.values()[Metadata.rawGetBitBlock(metadata, 4, 7)];
+		return DyeColor.values()[BlockMetadata.rawGetBitBlock(metadata, 4, 7)];
 	}
 
 	public static class Slab{
@@ -82,7 +82,7 @@ public class MetadataBlockHelper {
 		 * @return 			returns the slab state
 		 */
 		public static SlabState getState(int metadata){
-			int state = Metadata.rawGetBitBlock(metadata, 0, 1);
+			int state = BlockMetadata.rawGetBitBlock(metadata, 0, 1);
 			return SlabState.values()[state];
 		}
 
@@ -153,7 +153,7 @@ public class MetadataBlockHelper {
 		 * Importantly this differs from how BlockLogicStairs implements direction, this due to BTA placement setting and many layers of abstraction.
 		 */
 		public static Direction getDirectionFromMetadata(int metadata) {
-			int direction = Metadata.rawGetBitBlock(metadata, 0, 1);
+			int direction = BlockMetadata.rawGetBitBlock(metadata, 0, 1);
 			switch (direction) {
 				case 3:
 					return Direction.NORTH;
@@ -172,7 +172,7 @@ public class MetadataBlockHelper {
 		 * @return 			if the stair is facing upward or downwards
 		 */
 		public static boolean isUpper(int metadata) {
-			return Metadata.isSet(metadata, 3);
+			return BlockMetadata.isSet(metadata, 3);
 		}
 
 		/**
@@ -269,7 +269,7 @@ public class MetadataBlockHelper {
 		 * @return 			returns the metadata for the stairs in the direction ascending
 		 */
 		public static boolean isUpper(int metadata) {
-			return Metadata.isSet(metadata, 2);
+			return BlockMetadata.isSet(metadata, 2);
 		}
 
 		/**
@@ -277,7 +277,7 @@ public class MetadataBlockHelper {
 		 * @return 			returns the metadata for the stairs in the direction ascending
 		 */
 		public static boolean isOpen(int metadata) {
-			return Metadata.isSet(metadata, 3);
+			return BlockMetadata.isSet(metadata, 3);
 		}
 
 
@@ -313,7 +313,7 @@ public class MetadataBlockHelper {
 		 * @return 			if the gate is open or not
 		 */
 		public static boolean isOpen(int metadata){
-			return Metadata.isSet(metadata, 3);
+			return BlockMetadata.isSet(metadata, 3);
 		}
 
 		/**
@@ -329,7 +329,7 @@ public class MetadataBlockHelper {
 		 * @return 			DyeColor of the fencegate
 		 */
 		public static Direction getDirection(int metadata){
-			return horizontalDirections[Metadata.rawGetBitBlock(metadata, 0, 1)];
+			return horizontalDirections[BlockMetadata.rawGetBitBlock(metadata, 0, 1)];
 		}
 
 	}
