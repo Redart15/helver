@@ -22,4 +22,18 @@ class Metadata {
 	protected static int rawGetBit(int metadata, int index) {
 		return (metadata >>> index) & 1;
 	}
+
+
+	protected static int rawGetUpperBlock(int maskLength, int metadata){
+		int mask = (1 << (maskLength + 1)) - 1;
+		return (metadata & (mask << maskLength)) >> maskLength;
+	}
+	protected static int rawGetLowerBlock(int maskLength, int metadata){
+		int mask = (1 << (maskLength + 1)) - 1;
+		return metadata & (1 << mask);
+	}
+	protected static int rawGetBitBlock(int blockLength, int metadata, int startIndex, int len){
+		int mask = (1 << len) - 1;
+		return ((metadata & (1 << blockLength)) >>> startIndex) & mask;
+	}
 }
