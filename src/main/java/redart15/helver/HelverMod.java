@@ -7,11 +7,11 @@ import turniplabs.halplibe.util.GameStartEntrypoint;
 import turniplabs.halplibe.util.RecipeEntrypoint;
 
 public class HelverMod implements ModInitializer, RecipeEntrypoint, GameStartEntrypoint {
-	public static final String MOD_ID = "examplemod";
+	public static final String MOD_ID = "helver";
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 	@Override
 	public void onInitialize() {
-		LOGGER.info("ExampleMod initialized.");
+		LOGGER.info("HelverAPI initialized.");
 	}
 
 	@Override

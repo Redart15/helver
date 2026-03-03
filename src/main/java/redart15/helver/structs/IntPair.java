@@ -3,7 +3,7 @@ package redart15.helver.structs;
 import java.util.Objects;
 
 /**
- * @implNote To avoid Boxing integer, frequently used by BlockPallet
+ * @implNote To avoid Boxing integer in pairs.
  */
 public class IntPair {
     private final int first;

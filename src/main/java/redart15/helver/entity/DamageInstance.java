@@ -1,4 +1,4 @@
-package redart15.helver.entity.particle;
+package redart15.helver.entity;
 
 import net.minecraft.core.util.helper.DamageType;
 import org.jetbrains.annotations.NotNull;

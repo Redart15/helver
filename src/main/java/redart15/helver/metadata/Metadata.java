@@ -1,13 +1,15 @@
 package redart15.helver.metadata;
 
 public class Metadata {
+	public static final int BLOCK_LENGTH = 8;
+	public static final int ITEM_LENGTH = 16;
 	private static final int MAX_METAVALUE = 0b1111_1111;
 	private static final int UPPER_MASK = 0b1111_0000;
 	private static final int LOWER_MASK = 0b0000_1111;
 	private static final int NIBBLE_LENGTH = 4;
 	private static final int NOT_METADATA = -1;
 
-	private Metadata(){}
+	private Metadata(){/* no need to initiate*/}
 
 	public static boolean isSet(int metadata, int index){
 		return (Metadata.getBit(metadata, index) & 1) == 1;

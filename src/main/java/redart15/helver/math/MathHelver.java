@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class MathHelver {
 
-	private MathHelver(){}
+	private MathHelver(){/* no need to initiate*/}
 
 	/**
 	 * @return value between 0 and 1 with a normal distribution

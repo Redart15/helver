@@ -4,6 +4,11 @@ import org.jspecify.annotations.NonNull;
 
 import java.util.Objects;
 
+/**
+ * @implNote Angry rant incoming. Why in the ever loving beautiful and innocent FUCK does java not have this by default.
+ * I want to be able to set entries with custom priority and the standard does not offer this. This class exist just for
+ * that.
+ * */
 public class PriorityEntry<T> implements Comparable<PriorityEntry<T>> {
     private final double weight;
     private final T data;
