@@ -3,7 +3,9 @@ plugins {
 	alias(libs.plugins.loom)
 	alias(libs.plugins.lwjgl)
     java
+	`maven-publish`
 }
+
 val modVersion: Provider<String> = providers.gradleProperty("mod_version")
 val modGroup: Provider<String> = providers.gradleProperty("mod_group")
 val modName: Provider<String> = providers.gradleProperty("mod_name")
@@ -127,3 +129,15 @@ tasks {
 }
 // Removes LWJGL2 dependencies
 configurations.configureEach { exclude(group = "org.lwjgl.lwjgl") }
+
+publishing {
+	publications {
+		create<MavenPublication>("mavenJava") {
+			from(components["java"])
+
+			groupId = project.group.toString()
+			artifactId = project.name
+			version = project.version.toString()
+		}
+	}
+}
